@@ -4,19 +4,20 @@ app.controller('myCtrl', function($scope) {
 
   // init
   $scope.image = "safranek";
-  $scope.maxLineWidth = 5;
-  generateSpiral($scope.image, $scope.maxLineWidth);
+  $scope.maxLineWidth = "5";
+  $scope.lineDistance = "0";
+  generateSpiral($scope.image, parseInt($scope.maxLineWidth), parseInt($scope.lineDistance));
 
   // onChange
   $scope.onNgChange = function() {
-    generateSpiral($scope.image, $scope.maxLineWidth);
+    generateSpiral($scope.image, parseInt($scope.maxLineWidth), parseInt($scope.lineDistance));
   };
 
 });
 // Angular application end
 
 
-function generateSpiral(image, maxLineWidth) {
+function generateSpiral(image, maxLineWidth, lineDistance) {
 
   // load source image
 
@@ -30,7 +31,7 @@ function generateSpiral(image, maxLineWidth) {
     default:
       var imgSrc = 'images/safranek.png';
       break;
-}
+  }
 
   var img = new Image();
   img.src = imgSrc + '?' + new Date().getTime();
@@ -72,16 +73,16 @@ function generateSpiral(image, maxLineWidth) {
 
     // generate array with point coordinates
 
-    pointCoordinatesArray = createEquidistantPointsAlongAnArchimedeanSpiral(canvasWidth, canvasHeight, maxPointSize);
+    pointCoordinatesArray = createEquidistantPointsAlongAnArchimedeanSpiral(canvasWidth, canvasHeight, maxPointSize, lineDistance);
 
     // start animation, draw first frame
 
     var p = 0; // reset iterationcounter
-
-//    window.requestAnimationFrame(function(timestamp) {
+    
+    while (p < pointCoordinatesArray.length - 1) {
       iterateStuff(p, pointCoordinatesArray, maxPointSize);
-//    });
-
+      p++;
+    } // end while
   }
 
 } // end of GenerateCat function
@@ -89,27 +90,17 @@ function generateSpiral(image, maxLineWidth) {
 
 function iterateStuff(p, pointCoordinatesArray, maxPointSize){
 
-  while (p < pointCoordinatesArray.length - 1) {
-    // console.log("iteration: "+p);
+  // console.log("iteration: "+p);
 
-    var x1 = pointCoordinatesArray[p].x;
-    var y1 = pointCoordinatesArray[p].y;
-    var pointSize1 = maxPointSize * getPointSize(x1, y1, cOrigin);
+  var x1 = pointCoordinatesArray[p].x;
+  var y1 = pointCoordinatesArray[p].y;
+  var pointSize1 = maxPointSize * getPointSize(x1, y1, cOrigin);
 
-    var x2 = pointCoordinatesArray[p+1].x;
-    var y2 = pointCoordinatesArray[p+1].y;
-    var pointSize2 = maxPointSize * getPointSize(x2, y2, cOrigin);
+  var x2 = pointCoordinatesArray[p+1].x;
+  var y2 = pointCoordinatesArray[p+1].y;
+  var pointSize2 = maxPointSize * getPointSize(x2, y2, cOrigin);
 
-    driveLineRounded(cResult, x1, y1, x2, y2, pointSize1, pointSize2);
-    
-    // next iteration
-
-    p++;
-  }
-
-//  window.requestAnimationFrame(function(timestamp) {
-//    iterateStuff(p, pointCoordinatesArray, maxPointSize);
-//  });
+  driveLineRounded(cResult, x1, y1, x2, y2, pointSize1, pointSize2);
 
 } // end of iterateStuff function
 
@@ -161,15 +152,15 @@ function driveLineRounded(ctx, x1, y1, x2, y2, w1, w2) {
 
 // calculate equidistant point coordinates along an archimedian spiral
 // based on https://stackoverflow.com/questions/13894715/draw-equidistant-points-on-a-spiral
-function createEquidistantPointsAlongAnArchimedeanSpiral(canvasWidth, canvasHeight, maxPointSize) {
+function createEquidistantPointsAlongAnArchimedeanSpiral(canvasWidth, canvasHeight, maxPointSize, lineDistance) {
   var width = canvasWidth,
       height = canvasHeight;
 
   var centerX = width/2,
       centerY = height/2,
       radius = width/2,
-      coils = canvasWidth / 2 / maxPointSize;
-
+      coils = canvasWidth / 2 / (maxPointSize + lineDistance);
+  
   var rotation = 2 * Math.PI;
   var thetaMax = coils * 2 * Math.PI;
   var awayStep = radius / thetaMax;

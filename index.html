@@ -28,8 +28,8 @@
         </div>
         <div class="row">
           <div class="col">
-            <canvas id="myCanvasOrigin" height="200" width="200" style="border:1px solid #ccc;"></canvas>
             <canvas id="myCanvasResult" height="200" width="200" style="border:1px solid #ccc;"></canvas>
+            <canvas id="myCanvasOrigin" height="200" width="200" style="border:1px solid #ccc;"></canvas>
           </div>
           <div class="col">
             <div class="container">
@@ -44,9 +44,36 @@
                   </div>
                 </div>
                 <div class="form-group row">
-                  <label for="maxLineWidth" class="col-sm-6 col-form-label">MaxLineWidth:</label>
+                  <label for="maxLineWidth" class="col-sm-6 col-form-label">maxLineWidth:</label>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control" id="maxLineWidth" ng-change="onNgChange()" ng-model="maxLineWidth">
+                    <select class="form-control" id="maxLineWidth" ng-change="onNgChange()" ng-model="maxLineWidth">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="lineDistance" class="col-sm-6 col-form-label">lineDistance:</label>
+                  <div class="col-sm-6">
+                    <select class="form-control" id="lineDistance" ng-change="onNgChange()" ng-model="lineDistance">
+                      <option value="0">0</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                    </select>
                   </div>
                 </div>
               </form>
