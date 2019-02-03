@@ -5,18 +5,18 @@ app.controller('myCtrl', function($scope) {
   // init
   $scope.image = "safranek";
   $scope.maxLineWidth = 5;
-  generateVolute($scope.image, $scope.maxLineWidth);
+  generateSpiral($scope.image, $scope.maxLineWidth);
 
   // onChange
   $scope.onNgChange = function() {
-    generateVolute($scope.image, $scope.maxLineWidth);
+    generateSpiral($scope.image, $scope.maxLineWidth);
   };
 
 });
 // Angular application end
 
 
-function generateVolute(image, maxLineWidth) {
+function generateSpiral(image, maxLineWidth) {
 
   // load source image
 
