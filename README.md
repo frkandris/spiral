@@ -1,4 +1,4 @@
-# Volute
+# Spiral
 algorithm to draw a picture with a spiral
 
 # Usage on a machine with git & python
