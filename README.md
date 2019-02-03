@@ -1,7 +1,11 @@
 # Spiral
 algorithm to draw a picture with a spiral
 
-# Usage on a machine with git & python
+# Live demo
+
+https://frkandris.github.io/spiral/
+
+# Usage on your local machine with git & python
 ```
 git clone git@github.com:frkandris/spiral.git
 cd spiral
